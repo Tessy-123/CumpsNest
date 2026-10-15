@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { describe, it, expect, beforeEach } from 'vitest';
 import ExplorePage from '../pages/ExplorePage';
+import App from '../App';
 import { AuthProvider } from '../context/AuthContext';
 import { accommodationsService } from '../services/accommodations.service';
 
@@ -30,6 +31,7 @@ function renderExplorePage() {
 describe('Search Filters and Exploration Component', () => {
   beforeEach(() => {
     localStorage.clear();
+    window.history.pushState({}, '', '/');
   });
 
   it('renders search filter controls and budget slider', async () => {
@@ -79,5 +81,20 @@ describe('Search Filters and Exploration Component', () => {
     await waitFor(() => {
       expect(screen.getByLabelText(/Monthly budget in Malawi Kwacha/i)).toHaveValue('120000');
     });
+  });
+});
+
+describe('Application routing', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    localStorage.setItem('campusnest_token', 'mock-token');
+    localStorage.setItem('campusnest_user', JSON.stringify({ id: 'user-1', fullName: 'Test User' }));
+    window.history.pushState({}, '', '/landlord/listings/new');
+  });
+
+  it('renders the landlord listing creation route', async () => {
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: /Create New Accommodation Listing/i })).toBeInTheDocument();
   });
 });
