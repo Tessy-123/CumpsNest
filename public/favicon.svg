@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cnGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#004340" />
+      <stop offset="100%" stop-color="#002b28" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded Brand Base in Warm Civic Primary Teal -->
+  <rect width="64" height="64" rx="14" fill="url(#cnGradient)" />
+  
+  <!-- CampusNest Student Village Chalets Icon -->
+  <g fill="#FFFFFF">
+    <!-- Left Main Hostel Chalet -->
+    <path d="M11 28 L24 13 L37 28 H33 V48 H27 V35 H21 V48 H15 V28 Z" />
+    <!-- Attic window -->
+    <circle cx="24" cy="24" r="2.5" fill="#004340" />
+    
+    <!-- Right Adjacent Hostel Chalet -->
+    <path d="M37 25 L47 15 L57 25 H53 V48 H41 V25 Z" opacity="0.95" />
+    <rect x="44" y="32" width="6" height="6" rx="1" fill="#004340" />
+    
+    <!-- Verified Ground Baseline in Mint -->
+    <rect x="11" y="47" width="46" height="2" rx="1" fill="#85f8c4" />
+  </g>
+</svg>
