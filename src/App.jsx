@@ -21,82 +21,105 @@ const TermsPage = lazy(() => import('./pages/TermsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
+// Administrator page
+const AdminDashboardPage = lazy(
+() => import('./pages/AdminDashboardPage')
+);
+
 // Configure TanStack Query
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      refetchOnWindowFocus: false,
-      retry: 1,
-    },
-  },
+defaultOptions: {
+queries: {
+staleTime: 1000 * 60 * 5,
+refetchOnWindowFocus: false,
+retry: 1,
+},
+},
 });
 
 // Lightweight Suspense fallback
 function PageLoader() {
-  return (
-    <div className="flex-1 flex flex-col items-center justify-center p-12 min-h-[50vh]">
-      <div className="w-10 h-10 border-4 border-surface-container border-t-primary rounded-full animate-spin" />
-      <span className="mt-3 font-heading text-xs font-semibold text-primary">
-        Loading CampusNest...
-      </span>
-    </div>
-  );
+return (
+<div className="flex min-h-[50vh] flex-1 flex-col items-center justify-center p-12">
+<div className="h-10 w-10 animate-spin rounded-full border-4 border-surface-container border-t-primary" />
+
+  <span className="mt-3 font-heading text-xs font-semibold text-primary">
+    Loading CampusNest...
+  </span>
+</div>
+
+);
 }
 
 export default function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                {/* Public Student Routes */}
-                <Route index element={<HomePage />} />
-                <Route path="explore" element={<ExplorePage />} />
-                <Route path="listings/:id" element={<ListingDetailPage />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
-                <Route path="safety" element={<SafetyPage />} />
-                <Route path="faq" element={<FaqPage />} />
-                <Route path="privacy" element={<PrivacyPage />} />
-                <Route path="terms" element={<TermsPage />} />
-                <Route path="contact" element={<ContactPage />} />
+return (
+<QueryClientProvider client={queryClient}>
+<AuthProvider>
+<BrowserRouter>
+<Suspense fallback={<PageLoader />}>
+<Routes>
+<Route path="/" element={<Layout />}>
+{/* Public Student Routes */}
+<Route index element={<HomePage />} />
+<Route path="explore" element={<ExplorePage />} />
+<Route
+path="listings/"
+element={<ListingDetailPage />}
+/>
+<Route path="login" element={<LoginPage />} />
+<Route path="register" element={<RegisterPage />} />
+<Route path="safety" element={<SafetyPage />} />
+<Route path="faq" element={<FaqPage />} />
+<Route path="privacy" element={<PrivacyPage />} />
+<Route path="terms" element={<TermsPage />} />
+<Route path="contact" element={<ContactPage />} />
 
-                {/* Protected Student Routes */}
-                <Route
-                  path="dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <DashboardPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="profile"
-                  element={
-                    <ProtectedRoute>
-                      <ProfilePage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="listings/:id/report"
-                  element={
-                    <ProtectedRoute>
-                      <ReportListingPage />
-                    </ProtectedRoute>
-                  }
-                />
+            {/* Protected Student Routes */}
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
 
-                {/* 404 Catch-All */}
-                <Route path="*" element={<NotFoundPage />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </AuthProvider>
-    </QueryClientProvider>
-  );
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="listings/:id/report"
+              element={
+                <ProtectedRoute>
+                  <ReportListingPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Administrator Route */}
+            <Route
+              path="admin"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* 404 Catch-All */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  </AuthProvider>
+</QueryClientProvider>
+
+);
 }
