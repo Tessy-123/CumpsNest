@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function EditListingForm() {
   const { id } = useParams(); // Gets the accommodation ID from the URL
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -18,7 +18,7 @@ export default function EditListingForm() {
     facilities: [],
     availability_status: 'available'
   });
-  
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -89,17 +89,17 @@ export default function EditListingForm() {
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow p-8 border border-gray-100">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Edit Accommodation Listing</h1>
-        
+
         {error && <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Listing Title</label>
-            <input 
-              type="text" 
-              name="title" 
+            <input
+              type="text"
+              name="title"
               required
-              value={formData.title} 
+              value={formData.title}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
             />
@@ -108,22 +108,22 @@ export default function EditListingForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Area / Location</label>
-              <input 
-                type="text" 
-                name="area" 
+              <input
+                type="text"
+                name="area"
                 required
-                value={formData.area} 
+                value={formData.area}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Nearby University / College</label>
-              <input 
-                type="text" 
-                name="university_nearby" 
+              <input
+                type="text"
+                name="university_nearby"
                 required
-                value={formData.university_nearby} 
+                value={formData.university_nearby}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
@@ -133,24 +133,24 @@ export default function EditListingForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Rent (MWK)</label>
-              <input 
-                type="number" 
-                name="rent_mwk" 
+              <input
+                type="number"
+                name="rent_mwk"
                 required
                 min="0"
-                value={formData.rent_mwk} 
+                value={formData.rent_mwk}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Deposit (MWK)</label>
-              <input 
-                type="number" 
-                name="deposit_mwk" 
+              <input
+                type="number"
+                name="deposit_mwk"
                 required
                 min="0"
-                value={formData.deposit_mwk} 
+                value={formData.deposit_mwk}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
@@ -160,9 +160,9 @@ export default function EditListingForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Room Type</label>
-              <select 
-                name="room_type" 
-                value={formData.room_type} 
+              <select
+                name="room_type"
+                value={formData.room_type}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               >
@@ -174,9 +174,9 @@ export default function EditListingForm() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Availability Status</label>
-              <select 
-                name="availability_status" 
-                value={formData.availability_status} 
+              <select
+                name="availability_status"
+                value={formData.availability_status}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               >
@@ -192,8 +192,8 @@ export default function EditListingForm() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {facilityOptions.map(facility => (
                 <label key={facility} className="flex items-center space-x-2 text-sm text-gray-700 cursor-pointer">
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     checked={Array.isArray(formData.facilities) && formData.facilities.includes(facility)}
                     onChange={() => handleCheckboxChange(facility)}
                     className="rounded text-blue-600 focus:ring-blue-500"
@@ -206,26 +206,26 @@ export default function EditListingForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea 
-              name="description" 
-              rows="4" 
+            <textarea
+              name="description"
+              rows="4"
               required
-              value={formData.description} 
+              value={formData.description}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
             ></textarea>
           </div>
 
           <div className="flex justify-end space-x-4 pt-4 border-t">
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={() => navigate('/landlord/dashboard')}
               className="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50"
             >
               Cancel
             </button>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={submitting}
               className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
             >
@@ -244,7 +244,7 @@ import axios from 'axios';
 export default function EditListingForm() {
   const { id } = useParams(); // Gets the accommodation ID from the URL
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -256,7 +256,7 @@ export default function EditListingForm() {
     facilities: [],
     availability_status: 'available'
   });
-  
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -327,17 +327,17 @@ export default function EditListingForm() {
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow p-8 border border-gray-100">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Edit Accommodation Listing</h1>
-        
+
         {error && <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Listing Title</label>
-            <input 
-              type="text" 
-              name="title" 
+            <input
+              type="text"
+              name="title"
               required
-              value={formData.title} 
+              value={formData.title}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
             />
@@ -346,22 +346,22 @@ export default function EditListingForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Area / Location</label>
-              <input 
-                type="text" 
-                name="area" 
+              <input
+                type="text"
+                name="area"
                 required
-                value={formData.area} 
+                value={formData.area}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Nearby University / College</label>
-              <input 
-                type="text" 
-                name="university_nearby" 
+              <input
+                type="text"
+                name="university_nearby"
                 required
-                value={formData.university_nearby} 
+                value={formData.university_nearby}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
@@ -371,24 +371,24 @@ export default function EditListingForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Rent (MWK)</label>
-              <input 
-                type="number" 
-                name="rent_mwk" 
+              <input
+                type="number"
+                name="rent_mwk"
                 required
                 min="0"
-                value={formData.rent_mwk} 
+                value={formData.rent_mwk}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Deposit (MWK)</label>
-              <input 
-                type="number" 
-                name="deposit_mwk" 
+              <input
+                type="number"
+                name="deposit_mwk"
                 required
                 min="0"
-                value={formData.deposit_mwk} 
+                value={formData.deposit_mwk}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               />
@@ -398,9 +398,9 @@ export default function EditListingForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Room Type</label>
-              <select 
-                name="room_type" 
-                value={formData.room_type} 
+              <select
+                name="room_type"
+                value={formData.room_type}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               >
@@ -412,9 +412,9 @@ export default function EditListingForm() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Availability Status</label>
-              <select 
-                name="availability_status" 
-                value={formData.availability_status} 
+              <select
+                name="availability_status"
+                value={formData.availability_status}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
               >
@@ -430,8 +430,8 @@ export default function EditListingForm() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {facilityOptions.map(facility => (
                 <label key={facility} className="flex items-center space-x-2 text-sm text-gray-700 cursor-pointer">
-                  <input 
-                    type="checkbox" 
+                  <input
+                    type="checkbox"
                     checked={Array.isArray(formData.facilities) && formData.facilities.includes(facility)}
                     onChange={() => handleCheckboxChange(facility)}
                     className="rounded text-blue-600 focus:ring-blue-500"
@@ -444,26 +444,26 @@ export default function EditListingForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea 
-              name="description" 
-              rows="4" 
+            <textarea
+              name="description"
+              rows="4"
               required
-              value={formData.description} 
+              value={formData.description}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md px-3 py-2"
             ></textarea>
           </div>
 
           <div className="flex justify-end space-x-4 pt-4 border-t">
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={() => navigate('/landlord/dashboard')}
               className="px-4 py-2 border rounded-md text-gray-700 hover:bg-gray-50"
             >
               Cancel
             </button>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={submitting}
               className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
             >

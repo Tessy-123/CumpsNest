@@ -84,13 +84,13 @@ export default function ViewingRequests() {
                     <td className="py-4 px-6 text-right space-x-2">
                       {item.status === 'pending' && (
                         <>
-                          <button 
+                          <button
                             onClick={() => handleStatusUpdate(item.viewing_id, 'accepted')}
                             className="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700"
                           >
                             Accept
                           </button>
-                          <button 
+                          <button
                             onClick={() => handleStatusUpdate(item.viewing_id, 'rejected')}
                             className="bg-red-600 text-white px-3 py-1 rounded text-xs hover:bg-red-700"
                           >

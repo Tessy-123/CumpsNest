@@ -46,8 +46,8 @@ export default function LandlordDashboard() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-gray-800">Landlord Dashboard</h1>
-        <Link 
-          to="/landlord/listings/new" 
+        <Link
+          to="/landlord/listings/new"
           className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
         >
           + Add New Listing
@@ -104,7 +104,7 @@ export default function LandlordDashboard() {
                     </td>
                     <td className="py-4 px-6 text-right space-x-2">
                       <Link to={`/landlord/listings/edit/${item.accommodation_id}`} className="text-blue-600 hover:underline">Edit</Link>
-                      <button 
+                      <button
                         onClick={() => handleStatusToggle(item.accommodation_id, item.availability_status)}
                         className="text-gray-600 hover:underline"
                       >
